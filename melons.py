@@ -2,16 +2,15 @@
 
 class AbstractMelonOrder:
     base_price = 5
+    shipping = 0
 
     def __init__(self, species, qty):
         self.species = species
         self.qty = qty
         self.shipped = False
     
-    def get_total(self, shipping = 0):
+    def get_total(self):
         """Calculate price, including tax."""
-        print(self.shipping)
-
         total = ((1 + self.tax) * self.qty * self.base_price) + self.shipping
 
         return total
@@ -66,6 +65,21 @@ class InternationalChristmasMelonOrder(InternationalMelonOrder):
         """Set initial attributes of International Christmas Melons."""
         super().__init__(name,qty,country_code)
         self.base_price = 1.5 * self.base_price
+
+class GovernmentMelonOrder(AbstractMelonOrder):
+    """A Government Melon Order"""
+
+    def __init__(self,name,qty):
+        """Set initial attributes of an order set for government inspection"""
+        super().__init__(name,qty)
+        self.tax = 0
+        self.passed_inspection = False
+
+    def mark_inspection(self,passed):
+        """Inspect a melon and set inspection status to true"""
+
+        self.passed_inspection = passed
+
 
 
   
