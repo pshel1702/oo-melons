@@ -1,18 +1,23 @@
 """Classes for melon orders."""
 
-from random import Random
+import random
 
 class AbstractMelonOrder:
     shipping = 0
-    base_price = get_base_price(self)
 
     def __init__(self, species, qty):
         self.species = species
         self.qty = qty
         self.shipped = False
+
+    def get_base_price(self):
+        """Get base price based on splurge pricing."""
+        self.base_price = random.randrange(4,10)
+        return self.base_price
     
     def get_total(self):
         """Calculate price, including tax."""
+        self.base_price = self.get_base_price()
         print(self.base_price)
         total = ((1 + self.tax) * self.qty * self.base_price) + self.shipping
 
@@ -22,11 +27,6 @@ class AbstractMelonOrder:
         """Record the fact than an order has been shipped."""
 
         self.shipped = True
-    
-    def get_base_price(self):
-        """Get base price based on splurge pricing."""
-
-       return self.base_price = random(4,10)
 
 
 
