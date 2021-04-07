@@ -8,10 +8,11 @@ class AbstractMelonOrder:
         self.qty = qty
         self.shipped = False
     
-    def get_total(self):
+    def get_total(self, shipping = 0):
         """Calculate price, including tax."""
+        print(self.shipping)
 
-        total = (1 + self.tax) * self.qty * self.base_price
+        total = ((1 + self.tax) * self.qty * self.base_price) + self.shipping
 
         return total
 
@@ -39,7 +40,12 @@ class InternationalMelonOrder(AbstractMelonOrder):
         self.order_type = "international"
         self.tax = 0.17
         self.country_code = country_code
-
+        if self.qty < 10 :
+            self.shipping = 3
+        else:
+            self.shipping = 0
+         
+    
     def get_country_code(self):
         """Return the country code."""
 
@@ -49,9 +55,19 @@ class DomesticChristmasMelonOrder(DomesticMelonOrder):
     """A domestic christmas melon order"""
 
     def __init__(self,name,qty):
-        """Set initial attributes of Domestic Christmas Melons"""
+        """Set initial attributes of Domestic Christmas Melons."""
         super().__init__(name,qty)
         self.base_price = 1.5 * self.base_price
 
+class InternationalChristmasMelonOrder(InternationalMelonOrder):
+    """An international christmas melon order."""
+
+    def __init__(self,name,qty,country_code):
+        """Set initial attributes of International Christmas Melons."""
+        super().__init__(name,qty,country_code)
+        self.base_price = 1.5 * self.base_price
+
+
+  
 
 
