@@ -44,3 +44,14 @@ class InternationalMelonOrder(AbstractMelonOrder):
         """Return the country code."""
 
         return self.country_code
+
+class DomesticChristmasMelonOrder(DomesticMelonOrder):
+    """A domestic christmas melon order"""
+
+    def __init__(self,name,qty):
+        """Set initial attributes of Domestic Christmas Melons"""
+        super().__init__(name,qty)
+        self.base_price = 1.5 * self.base_price
+
+
+
